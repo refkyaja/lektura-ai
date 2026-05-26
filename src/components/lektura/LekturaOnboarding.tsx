@@ -169,23 +169,25 @@ export function LekturaOnboarding() {
                   transition={{ duration: 0.5 }}
                   className="space-y-3"
                 >
-                  <button
-                    className="w-full h-14 rounded-3xl font-display font-semibold text-base animate-breathe text-primary-foreground"
+                  <a
+                    href="/signup"
+                    className="w-full h-14 rounded-3xl font-display font-semibold text-base animate-breathe text-primary-foreground flex items-center justify-center"
                     style={{
                       background:
                         "linear-gradient(135deg,#6C63FF 0%,#4D8DFF 100%)",
                     }}
                   >
                     Mulai Sekarang ✨
-                  </button>
+                  </a>
                   <div className="grid grid-cols-2 gap-3">
-                    <button className="h-12 rounded-2xl glass text-sm font-medium hover:bg-white/10 transition">
+                    <a href="/login" className="h-12 rounded-2xl glass text-sm font-medium hover:bg-white/10 transition flex items-center justify-center">
                       Masuk
-                    </button>
-                    <button className="h-12 rounded-2xl glass text-sm font-medium hover:bg-white/10 transition">
+                    </a>
+                    <a href="/signup" className="h-12 rounded-2xl glass text-sm font-medium hover:bg-white/10 transition flex items-center justify-center">
                       Daftar
-                    </button>
+                    </a>
                   </div>
+
                 </motion.div>
               ) : (
                 <motion.div
