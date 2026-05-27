@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { AuthShell, SocialButtons, Divider } from "@/components/auth/AuthShell";
+import { VoiceField } from "@/components/auth/VoiceField";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -70,13 +71,15 @@ function LoginPage() {
       <Divider label="atau dengan email" />
 
       <form onSubmit={handleEmailLogin} className="space-y-3">
-        <Field
+        <VoiceField
           label="Email"
           type="email"
           value={email}
           onChange={setEmail}
           placeholder="kamu@email.com"
           required
+          mode="email"
+          voiceLabel="email"
         />
         <Field
           label="Password"
