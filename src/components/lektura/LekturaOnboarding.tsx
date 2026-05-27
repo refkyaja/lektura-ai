@@ -9,6 +9,7 @@ import {
   ReadyIllustration,
 } from "@/components/lektura/SlideIllustrations";
 import { AIOrb } from "@/components/lektura/AIOrb";
+import lekturaLogo from "@/assets/lektura-logo.png";
 
 type Slide = {
   illustration: React.ReactNode;
