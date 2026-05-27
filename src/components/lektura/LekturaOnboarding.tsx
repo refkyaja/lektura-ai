@@ -21,10 +21,10 @@ type Slide = {
 const slides: Slide[] = [
   {
     illustration: <HeroIllustration />,
-    kicker: "AI Study Companion",
-    title: "Ubah Rekaman Jadi Catatan Instan",
+    kicker: "Halo, selamat datang ✨",
+    title: "Belajar Jadi Lebih Ringan Bareng Lektura",
     subtitle:
-      "Dari perekaman suara → transkrip otomatis → ringkasan → flashcards → quiz interaktif.",
+      "Asisten belajar AI kamu — rekam kelas, ubah jadi catatan, ringkasan, flashcard, dan quiz dalam sekali ketuk.",
   },
   {
     illustration: <SpeechIllustration />,
