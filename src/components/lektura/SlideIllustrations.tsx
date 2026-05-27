@@ -206,75 +206,128 @@ export function BrainIllustration() {
   );
 }
 
-// Slide 4 — Organization / dashboard
+// Slide 4 — Smart Organization / note transformations
 export function DashboardIllustration() {
-  const folders = [
-    { name: "Matematika", icon: "📐", color: "from-[#6C63FF] to-[#4D8DFF]" },
-    { name: "Sejarah", icon: "📜", color: "from-[#B8A8FF] to-[#6C63FF]" },
-    { name: "Pemrograman", icon: "💻", color: "from-[#4D8DFF] to-[#8FE3FF]" },
-    { name: "Biologi", icon: "🧬", color: "from-[#8FE3FF] to-[#B8A8FF]" },
+  const outputs = [
+    {
+      label: "Ringkasan",
+      icon: "📄",
+      tint: "from-[#6C63FF] to-[#4D8DFF]",
+      delay: 0.5,
+    },
+    {
+      label: "Flashcards",
+      icon: "🃏",
+      tint: "from-[#B8A8FF] to-[#6C63FF]",
+      delay: 0.7,
+    },
+    {
+      label: "Quiz",
+      icon: "❓",
+      tint: "from-[#4D8DFF] to-[#8FE3FF]",
+      delay: 0.9,
+    },
   ];
+
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto">
+      {/* Source: raw transcript card */}
       <motion.div
-        className="glass-strong rounded-3xl p-5"
-        initial={{ opacity: 0, y: 20 }}
+        className="absolute left-1/2 top-2 -translate-x-1/2 glass-strong rounded-2xl px-4 py-3 w-[260px]"
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
       >
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
-              My Workspace
-            </div>
-            <div className="text-base font-display font-semibold">Catatanmu</div>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-base">🎙️</span>
+          <div className="text-[10px] uppercase tracking-widest text-[#8FE3FF]">
+            Transkrip mentah
           </div>
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#B8A8FF] to-[#6C63FF]" />
         </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          {folders.map((f, i) => (
-            <motion.div
-              key={f.name}
-              className="glass rounded-2xl p-3"
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.12, type: "spring" }}
-            >
-              <div
-                className={`h-9 w-9 rounded-xl bg-gradient-to-br ${f.color} flex items-center justify-center text-base mb-2`}
-              >
-                {f.icon}
-              </div>
-              <div className="text-xs font-semibold">{f.name}</div>
-              <div className="text-[10px] text-muted-foreground">
-                {3 + i * 2} catatan
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Floating tags */}
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {["#AI", "#kuis", "#minggu-ini"].map((t, i) => (
-            <motion.span
-              key={t}
-              className="text-[10px] px-2 py-1 rounded-full glass text-[#8FE3FF]"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: [0, -3, 0] }}
-              transition={{
-                opacity: { delay: 0.8 + i * 0.15, duration: 0.4 },
-                y: { duration: 3 + i, repeat: Infinity, ease: "easeInOut" },
-              }}
-            >
-              {t}
-            </motion.span>
-          ))}
+        <div className="space-y-1.5">
+          <div className="h-1.5 w-full rounded-full bg-white/15" />
+          <div className="h-1.5 w-[80%] rounded-full bg-white/10" />
+          <div className="h-1.5 w-[60%] rounded-full bg-white/10" />
         </div>
       </motion.div>
+
+      {/* Connecting flow lines */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 360 320"
+      >
+        {[
+          { x: 70, y: 220 },
+          { x: 180, y: 230 },
+          { x: 290, y: 220 },
+        ].map((p, i) => (
+          <motion.line
+            key={i}
+            x1="180"
+            y1="90"
+            x2={p.x}
+            y2={p.y}
+            stroke="url(#flowG)"
+            strokeWidth="1"
+            strokeDasharray="3 4"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.55 }}
+            transition={{ delay: 0.35 + i * 0.15, duration: 0.8 }}
+          />
+        ))}
+        <defs>
+          <linearGradient id="flowG" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#B8A8FF" />
+            <stop offset="100%" stopColor="#8FE3FF" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* AI label in the middle of the flow */}
+      <motion.div
+        className="absolute left-1/2 top-[120px] -translate-x-1/2 glass rounded-full px-3 py-1 flex items-center gap-1.5"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.35, duration: 0.5 }}
+      >
+        <span className="text-xs">✦</span>
+        <span className="text-[10px] uppercase tracking-widest text-[#8FE3FF]">
+          AI memproses
+        </span>
+      </motion.div>
+
+      {/* Three transformation outputs */}
+      <div className="absolute left-0 right-0 bottom-4 flex items-end justify-between px-1">
+        {outputs.map((o) => (
+          <motion.div
+            key={o.label}
+            className="glass-strong rounded-2xl px-3 py-3 flex flex-col items-center gap-1.5 w-[100px]"
+            initial={{ opacity: 0, y: 20, scale: 0.85 }}
+            animate={{ opacity: 1, y: [0, -4, 0], scale: 1 }}
+            transition={{
+              opacity: { delay: o.delay, duration: 0.5 },
+              scale: { delay: o.delay, duration: 0.5, type: "spring" },
+              y: {
+                delay: o.delay + 0.5,
+                duration: 3.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <div
+              className={`h-10 w-10 rounded-xl bg-gradient-to-br ${o.tint} flex items-center justify-center text-lg`}
+            >
+              {o.icon}
+            </div>
+            <span className="text-[11px] font-semibold">{o.label}</span>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
+
 
 // Slide 5 — Ready to start
 export function ReadyIllustration() {
