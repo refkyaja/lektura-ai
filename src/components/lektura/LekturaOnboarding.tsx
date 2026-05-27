@@ -62,7 +62,7 @@ export function LekturaOnboarding() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const t = setTimeout(() => setStage("onboarding"), 2400);
+    const t = setTimeout(() => setStage("onboarding"), 3400);
     return () => clearTimeout(t);
   }, []);
 
