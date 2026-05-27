@@ -1,68 +1,121 @@
 import { motion } from "framer-motion";
 import { AIOrb } from "./AIOrb";
 
-// Slide 1 — Hero / AI study companion
+// Slide 1 — Welcome / hero
 export function HeroIllustration() {
+  const bars = Array.from({ length: 18 });
+
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto">
-      {/* Student avatar card */}
+      {/* Greeting bubble */}
       <motion.div
-        className="absolute left-1/2 top-8 -translate-x-1/2 glass-strong rounded-3xl px-6 py-5 w-[220px]"
-        initial={{ opacity: 0, y: 20 }}
+        className="absolute left-2 top-0 glass rounded-2xl px-3 py-2 text-xs flex items-center gap-1.5"
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <div className="flex items-center gap-3">
-          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#B8A8FF] to-[#6C63FF] flex items-center justify-center text-2xl">
-            🎧
-          </div>
-          <div>
-            <div className="text-xs text-muted-foreground">Sedang fokus</div>
-            <div className="text-sm font-semibold">Belajar Fisika</div>
-          </div>
-        </div>
-        <div className="mt-3 h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#6C63FF] to-[#8FE3FF]"
-            initial={{ width: "0%" }}
-            animate={{ width: "72%" }}
-            transition={{ delay: 0.8, duration: 1.2 }}
-          />
-        </div>
+        <span>👋</span>
+        <span>Hai, siap belajar?</span>
       </motion.div>
 
-      {/* Floating note */}
+      {/* Floating quiz chip */}
       <motion.div
-        className="absolute right-2 top-44 glass rounded-2xl px-3 py-2 text-xs"
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0, y: [0, -8, 0] }}
+        className="absolute right-1 top-2 glass rounded-2xl px-3 py-2 text-xs flex items-center gap-1.5"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
         transition={{
-          opacity: { delay: 0.6, duration: 0.5 },
-          x: { delay: 0.6, duration: 0.5 },
+          opacity: { delay: 0.35, duration: 0.5 },
+          x: { delay: 0.35, duration: 0.5 },
           y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        📝 Catatan ✦
+        <span>❓</span>
+        <span>Quiz siap</span>
       </motion.div>
 
-      {/* Floating mini card */}
+      {/* Main recording card */}
       <motion.div
-        className="absolute left-0 top-52 glass rounded-2xl px-3 py-2 text-xs"
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
+        className="absolute left-1/2 top-16 -translate-x-1/2 glass-strong rounded-3xl px-5 py-4 w-[280px]"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+      >
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-[#FF6B6B] opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF6B6B]" />
+            </span>
+            <span className="text-[10px] uppercase tracking-widest text-[#8FE3FF]">
+              Merekam kelas
+            </span>
+          </div>
+          <span className="text-[10px] text-muted-foreground">00:42</span>
+        </div>
+
+        {/* Waveform */}
+        <div className="flex items-end gap-[3px] h-8 mb-3">
+          {bars.map((_, i) => (
+            <motion.span
+              key={i}
+              className="w-1 rounded-full bg-gradient-to-t from-[#4D8DFF] to-[#B8A8FF]"
+              animate={{
+                height: [
+                  `${20 + Math.random() * 20}%`,
+                  `${55 + Math.random() * 45}%`,
+                  `${20 + Math.random() * 20}%`,
+                ],
+              }}
+              transition={{
+                duration: 1 + Math.random(),
+                repeat: Infinity,
+                delay: i * 0.05,
+                ease: "easeInOut",
+              }}
+              style={{ height: "30%" }}
+            />
+          ))}
+        </div>
+
+        {/* Mini transcript */}
+        <div className="rounded-2xl bg-white/5 px-3 py-2 space-y-1.5">
+          <div className="text-[9px] uppercase tracking-widest text-[#8FE3FF]">
+            Transkrip
+          </div>
+          <div className="h-1.5 w-full rounded-full bg-white/15" />
+          <div className="h-1.5 w-[78%] rounded-full bg-white/10" />
+        </div>
+      </motion.div>
+
+      {/* Summary chip */}
+      <motion.div
+        className="absolute left-0 bottom-6 glass rounded-2xl px-3 py-2 text-xs flex items-center gap-1.5"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0, y: [0, 6, 0] }}
         transition={{
           opacity: { delay: 0.7, duration: 0.5 },
           x: { delay: 0.7, duration: 0.5 },
           y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        💡 Insight
+        <span>📄</span>
+        <span>Ringkasan</span>
       </motion.div>
 
-      {/* AI Orb */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
-        <AIOrb size={110} />
-      </div>
+      {/* Flashcard chip */}
+      <motion.div
+        className="absolute right-0 bottom-2 glass rounded-2xl px-3 py-2 text-xs flex items-center gap-1.5"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
+        transition={{
+          opacity: { delay: 0.85, duration: 0.5 },
+          x: { delay: 0.85, duration: 0.5 },
+          y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
+        }}
+      >
+        <span>🃏</span>
+        <span>Flashcard</span>
+      </motion.div>
     </div>
   );
 }
