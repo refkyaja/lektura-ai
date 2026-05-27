@@ -22,9 +22,9 @@ const slides: Slide[] = [
   {
     illustration: <HeroIllustration />,
     kicker: "AI Study Companion",
-    title: "Belajar Lebih Pintar dengan AI",
+    title: "Ubah Rekaman Jadi Catatan Instan",
     subtitle:
-      "Ubah suara kelas menjadi catatan otomatis, ringkasan, flashcard, dan kuis interaktif.",
+      "Dari perekaman suara → transkrip otomatis → ringkasan → flashcards → quiz interaktif.",
   },
   {
     illustration: <SpeechIllustration />,
@@ -42,10 +42,10 @@ const slides: Slide[] = [
   },
   {
     illustration: <DashboardIllustration />,
-    kicker: "Smart Workspace",
-    title: "Semua Catatan Lebih Rapi",
+    kicker: "Smart Organization",
+    title: "Semua Catatan Terorganisir Otomatis",
     subtitle:
-      "AI membantu memberi judul, kategori, dan struktur belajar yang lebih terorganisir.",
+      "AI memberikan judul, kategori, dan struktur catatan kamu secara instan.",
   },
   {
     illustration: <ReadyIllustration />,
