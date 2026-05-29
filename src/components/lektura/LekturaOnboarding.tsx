@@ -8,7 +8,6 @@ import {
   DashboardIllustration,
   ReadyIllustration,
 } from "@/components/lektura/SlideIllustrations";
-import { AIOrb } from "@/components/lektura/AIOrb";
 import lekturaLogo from "@/assets/lektura-logo.png";
 
 type Slide = {
@@ -62,7 +61,7 @@ export function LekturaOnboarding() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const t = setTimeout(() => setStage("onboarding"), 3400);
+    const t = setTimeout(() => setStage("onboarding"), 2400);
     return () => clearTimeout(t);
   }, []);
 
