@@ -242,18 +242,13 @@ function Logo({ small = false }: { small?: boolean }) {
 }
 
 function Splash() {
-  // Phase 1 (0 - 1.6s): app logo appears
-  // Phase 2 (1.6 - 2.6s): logo morphs into the AI orb
-  // Phase 3 (2.6 - 3.4s): orb settles + wordmark fades in
-  const [phase, setPhase] = useState<"logo" | "morph" | "orb">("logo");
+  // Phase 1 (0 - 1.4s): logo enters with blur+scale
+  // Phase 2 (1.4s+): logo floats gently and wordmark fades in
+  const [phase, setPhase] = useState<"enter" | "settle">("enter");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("morph"), 1600);
-    const t2 = setTimeout(() => setPhase("orb"), 2600);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    const t = setTimeout(() => setPhase("settle"), 1400);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -263,8 +258,8 @@ function Splash() {
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="relative flex items-center justify-center" style={{ width: 180, height: 180 }}>
-        {/* Soft halo that grows during morph */}
+      <div className="relative flex items-center justify-center" style={{ width: 200, height: 200 }}>
+        {/* Soft halo */}
         <motion.div
           className="absolute inset-0 rounded-full blur-3xl"
           style={{
@@ -273,49 +268,41 @@ function Splash() {
           }}
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{
-            opacity: phase === "logo" ? 0.35 : 0.8,
-            scale: phase === "logo" ? 0.8 : 1.15,
+            opacity: phase === "enter" ? 0.5 : 0.85,
+            scale: phase === "enter" ? 0.9 : 1.2,
           }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1.1, ease: "easeOut" }}
         />
 
-        {/* Phase 1: App logo */}
-        <AnimatePresence>
-          {phase === "logo" && (
-            <motion.img
-              key="logo"
-              src={lekturaLogo}
-              alt="Lektura AI logo"
-              width={512}
-              height={512}
-              className="absolute h-36 w-36 object-contain drop-shadow-[0_8px_30px_rgba(108,99,255,0.55)]"
-              initial={{ opacity: 0, scale: 0.6, filter: "blur(18px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{
-                opacity: 0,
-                scale: 0.4,
-                borderRadius: "50%",
-                filter: "blur(14px)",
-              }}
-              transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
-            />
-          )}
-        </AnimatePresence>
+        {/* Animated rotating ring */}
+        <motion.div
+          className="absolute inset-2 rounded-full border border-white/15"
+          style={{ borderTopColor: "rgba(184,168,255,0.7)" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+        />
 
-        {/* Phase 2 → 3: AI Orb morphs in */}
-        <AnimatePresence>
-          {phase !== "logo" && (
-            <motion.div
-              key="orb"
-              className="absolute"
-              initial={{ opacity: 0, scale: 0.3, filter: "blur(16px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.9, ease: [0.34, 1.4, 0.64, 1] }}
-            >
-              <AIOrb size={150} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Lektura logo with gentle float */}
+        <motion.img
+          src={lekturaLogo}
+          alt="Lektura AI logo"
+          width={512}
+          height={512}
+          className="relative h-40 w-40 object-contain drop-shadow-[0_10px_40px_rgba(108,99,255,0.65)]"
+          initial={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            y: phase === "settle" ? [0, -8, 0] : 0,
+          }}
+          transition={{
+            opacity: { duration: 0.9, ease: [0.65, 0, 0.35, 1] },
+            scale: { duration: 0.9, ease: [0.34, 1.4, 0.64, 1] },
+            filter: { duration: 0.9 },
+            y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
+          }}
+        />
       </div>
 
       <motion.div
