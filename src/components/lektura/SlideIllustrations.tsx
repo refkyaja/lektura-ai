@@ -227,7 +227,7 @@ function Typewriter({ text }: { text: string }) {
 export function BrainIllustration() {
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto flex items-center justify-center">
-      <AIOrb size={140} />
+      <LogoMark size={140} />
 
       {/* Output cards radiating */}
       {[
@@ -412,7 +412,7 @@ export function ReadyIllustration() {
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto flex items-center justify-center">
       <div className="absolute inset-0 bg-aurora opacity-60 blur-2xl" />
-      <AIOrb size={160} />
+      <LogoMark size={160} />
       {/* Sparkles */}
       {Array.from({ length: 12 }).map((_, i) => {
         const angle = (i / 12) * Math.PI * 2;
