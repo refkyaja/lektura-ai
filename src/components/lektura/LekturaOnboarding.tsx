@@ -219,21 +219,14 @@ export function LekturaOnboarding() {
 }
 
 function Logo({ small = false }: { small?: boolean }) {
+  const size = small ? "h-8 w-8" : "h-10 w-10";
   return (
     <div className="flex items-center gap-2">
-      <div
-        className={`relative ${small ? "h-8 w-8" : "h-10 w-10"} rounded-2xl flex items-center justify-center`}
-        style={{
-          background:
-            "linear-gradient(135deg,#B8A8FF 0%,#6C63FF 50%,#4D8DFF 100%)",
-          boxShadow: "0 6px 20px -4px rgba(108,99,255,0.6)",
-        }}
-      >
-        <span className={`${small ? "text-sm" : "text-base"} font-display font-bold text-white`}>
-          L
-        </span>
-        <span className="absolute -top-0.5 -right-0.5 text-[10px]">✦</span>
-      </div>
+      <img
+        src={lekturaLogo}
+        alt="Lektura AI"
+        className={`${size} object-contain drop-shadow-[0_4px_14px_rgba(108,99,255,0.55)]`}
+      />
       <div className="font-display font-semibold tracking-tight">
         Lektura<span className="text-[#8FE3FF]"> AI</span>
       </div>
@@ -242,74 +235,47 @@ function Logo({ small = false }: { small?: boolean }) {
 }
 
 function Splash() {
-  // Phase 1 (0 - 1.4s): logo enters with blur+scale
-  // Phase 2 (1.4s+): logo floats gently and wordmark fades in
-  const [phase, setPhase] = useState<"enter" | "settle">("enter");
-
-  useEffect(() => {
-    const t = setTimeout(() => setPhase("settle"), 1400);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <motion.div
       key="splash"
-      className="relative z-10 min-h-screen flex flex-col items-center justify-center gap-6"
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 0.6 }}
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center gap-8"
+      exit={{ opacity: 0, scale: 1.04, filter: "blur(6px)" }}
+      transition={{ duration: 0.55, ease: "easeInOut" }}
     >
-      <div className="relative flex items-center justify-center" style={{ width: 200, height: 200 }}>
-        {/* Soft halo */}
+      <div
+        className="relative flex items-center justify-center"
+        style={{ width: 220, height: 220 }}
+      >
+        {/* Pulsing halo */}
         <motion.div
           className="absolute inset-0 rounded-full blur-3xl"
           style={{
             background:
               "radial-gradient(circle, #B8A8FF 0%, #6C63FF 45%, transparent 75%)",
           }}
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{
-            opacity: phase === "enter" ? 0.5 : 0.85,
-            scale: phase === "enter" ? 0.9 : 1.2,
-          }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: [0.5, 0.85, 0.6], scale: [0.95, 1.15, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Animated rotating ring */}
-        <motion.div
-          className="absolute inset-2 rounded-full border border-white/15"
-          style={{ borderTopColor: "rgba(184,168,255,0.7)" }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-        />
-
-        {/* Lektura logo with gentle float */}
+        {/* Logo */}
         <motion.img
           src={lekturaLogo}
-          alt="Lektura AI logo"
+          alt="Lektura AI"
           width={512}
           height={512}
-          className="relative h-40 w-40 object-contain drop-shadow-[0_10px_40px_rgba(108,99,255,0.65)]"
-          initial={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            y: phase === "settle" ? [0, -8, 0] : 0,
-          }}
-          transition={{
-            opacity: { duration: 0.9, ease: [0.65, 0, 0.35, 1] },
-            scale: { duration: 0.9, ease: [0.34, 1.4, 0.64, 1] },
-            filter: { duration: 0.9 },
-            y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
-          }}
+          className="relative h-44 w-44 object-contain drop-shadow-[0_12px_40px_rgba(108,99,255,0.7)]"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
 
       <motion.div
         className="text-center"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: phase === "settle" ? 1 : 0, y: phase === "settle" ? 0 : 12 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
       >
         <div className="font-display text-3xl font-semibold text-gradient">
           Lektura AI
@@ -321,3 +287,4 @@ function Splash() {
     </motion.div>
   );
 }
+
