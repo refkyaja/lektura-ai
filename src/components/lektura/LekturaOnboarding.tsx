@@ -308,7 +308,7 @@ function Splash() {
       <motion.div
         className="text-center"
         initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: phase === "orb" ? 1 : 0, y: phase === "orb" ? 0 : 12 }}
+        animate={{ opacity: phase === "settle" ? 1 : 0, y: phase === "settle" ? 0 : 12 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <div className="font-display text-3xl font-semibold text-gradient">
