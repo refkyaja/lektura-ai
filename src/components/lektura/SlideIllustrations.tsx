@@ -1,5 +1,30 @@
 import { motion } from "framer-motion";
-import { AIOrb } from "./AIOrb";
+import lekturaLogo from "@/assets/lektura-logo.png";
+
+function LogoMark({ size = 140 }: { size?: number }) {
+  return (
+    <motion.div
+      className="relative"
+      style={{ width: size, height: size }}
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <div
+        className="absolute inset-0 rounded-full blur-2xl opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle, #B8A8FF 0%, #6C63FF 45%, transparent 72%)",
+        }}
+      />
+      <img
+        src={lekturaLogo}
+        alt="Lektura AI"
+        className="relative h-full w-full object-contain drop-shadow-[0_8px_30px_rgba(108,99,255,0.6)]"
+      />
+    </motion.div>
+  );
+}
+
 
 // Slide 1 — Welcome / hero
 export function HeroIllustration() {
@@ -202,7 +227,7 @@ function Typewriter({ text }: { text: string }) {
 export function BrainIllustration() {
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto flex items-center justify-center">
-      <AIOrb size={140} />
+      <LogoMark size={140} />
 
       {/* Output cards radiating */}
       {[
@@ -387,7 +412,7 @@ export function ReadyIllustration() {
   return (
     <div className="relative h-[320px] w-full max-w-[360px] mx-auto flex items-center justify-center">
       <div className="absolute inset-0 bg-aurora opacity-60 blur-2xl" />
-      <AIOrb size={160} />
+      <LogoMark size={160} />
       {/* Sparkles */}
       {Array.from({ length: 12 }).map((_, i) => {
         const angle = (i / 12) * Math.PI * 2;
