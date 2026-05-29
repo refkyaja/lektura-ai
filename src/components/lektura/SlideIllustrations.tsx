@@ -1,5 +1,30 @@
 import { motion } from "framer-motion";
-import { AIOrb } from "./AIOrb";
+import lekturaLogo from "@/assets/lektura-logo.png";
+
+function LogoMark({ size = 140 }: { size?: number }) {
+  return (
+    <motion.div
+      className="relative"
+      style={{ width: size, height: size }}
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <div
+        className="absolute inset-0 rounded-full blur-2xl opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle, #B8A8FF 0%, #6C63FF 45%, transparent 72%)",
+        }}
+      />
+      <img
+        src={lekturaLogo}
+        alt="Lektura AI"
+        className="relative h-full w-full object-contain drop-shadow-[0_8px_30px_rgba(108,99,255,0.6)]"
+      />
+    </motion.div>
+  );
+}
+
 
 // Slide 1 — Welcome / hero
 export function HeroIllustration() {
