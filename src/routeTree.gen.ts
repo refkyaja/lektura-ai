@@ -9,13 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StudyRouteImport } from './routes/study'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RecordRouteImport } from './routes/record'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as NotesRouteImport } from './routes/notes'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NotesNewRouteImport } from './routes/notes.new'
+import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 
+const StudyRoute = StudyRouteImport.update({
+  id: '/study',
+  path: '/study',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -24,6 +35,21 @@ const SignupRoute = SignupRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecordRoute = RecordRouteImport.update({
+  id: '/record',
+  path: '/record',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -46,22 +72,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesNewRoute = NotesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => NotesRoute,
+} as any)
+const NotesNoteIdRoute = NotesNoteIdRouteImport.update({
+  id: '/$noteId',
+  path: '/$noteId',
+  getParentRoute: () => NotesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/notes': typeof NotesRouteWithChildren
+  '/profile': typeof ProfileRoute
+  '/record': typeof RecordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/study': typeof StudyRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/new': typeof NotesNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/notes': typeof NotesRouteWithChildren
+  '/profile': typeof ProfileRoute
+  '/record': typeof RecordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/study': typeof StudyRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/new': typeof NotesNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,8 +117,14 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/notes': typeof NotesRouteWithChildren
+  '/profile': typeof ProfileRoute
+  '/record': typeof RecordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/study': typeof StudyRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/new': typeof NotesNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -79,24 +133,42 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/home'
     | '/login'
+    | '/notes'
+    | '/profile'
+    | '/record'
     | '/reset-password'
     | '/signup'
+    | '/study'
+    | '/notes/$noteId'
+    | '/notes/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/forgot-password'
     | '/home'
     | '/login'
+    | '/notes'
+    | '/profile'
+    | '/record'
     | '/reset-password'
     | '/signup'
+    | '/study'
+    | '/notes/$noteId'
+    | '/notes/new'
   id:
     | '__root__'
     | '/'
     | '/forgot-password'
     | '/home'
     | '/login'
+    | '/notes'
+    | '/profile'
+    | '/record'
     | '/reset-password'
     | '/signup'
+    | '/study'
+    | '/notes/$noteId'
+    | '/notes/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,12 +176,23 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
+  NotesRoute: typeof NotesRouteWithChildren
+  ProfileRoute: typeof ProfileRoute
+  RecordRoute: typeof RecordRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
+  StudyRoute: typeof StudyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/study': {
+      id: '/study'
+      path: '/study'
+      fullPath: '/study'
+      preLoaderRoute: typeof StudyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -122,6 +205,27 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/record': {
+      id: '/record'
+      path: '/record'
+      fullPath: '/record'
+      preLoaderRoute: typeof RecordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -152,16 +256,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes/new': {
+      id: '/notes/new'
+      path: '/new'
+      fullPath: '/notes/new'
+      preLoaderRoute: typeof NotesNewRouteImport
+      parentRoute: typeof NotesRoute
+    }
+    '/notes/$noteId': {
+      id: '/notes/$noteId'
+      path: '/$noteId'
+      fullPath: '/notes/$noteId'
+      preLoaderRoute: typeof NotesNoteIdRouteImport
+      parentRoute: typeof NotesRoute
+    }
   }
 }
+
+interface NotesRouteChildren {
+  NotesNoteIdRoute: typeof NotesNoteIdRoute
+  NotesNewRoute: typeof NotesNewRoute
+}
+
+const NotesRouteChildren: NotesRouteChildren = {
+  NotesNoteIdRoute: NotesNoteIdRoute,
+  NotesNewRoute: NotesNewRoute,
+}
+
+const NotesRouteWithChildren = NotesRoute._addFileChildren(NotesRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
+  NotesRoute: NotesRouteWithChildren,
+  ProfileRoute: ProfileRoute,
+  RecordRoute: RecordRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
+  StudyRoute: StudyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
