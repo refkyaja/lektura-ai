@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Mic,
-  Sparkles,
   Layers,
   HelpCircle,
   Search,
@@ -242,11 +241,6 @@ function HomePage() {
       </div>
 
       <BottomNav />
-
-      {/* Hide unused icons referenced for parity */}
-      <span className="hidden">
-        <Sparkles />
-      </span>
     </main>
   );
 }
