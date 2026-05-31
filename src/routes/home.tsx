@@ -34,7 +34,7 @@ const quickActions = [
   { label: "Tulis", icon: Type, color: "from-[#6C63FF] to-[#4D8DFF]", to: "/notes/new" as const },
   { label: "Catatan", icon: FileText, color: "from-[#4D8DFF] to-[#8FE3FF]", to: "/notes" as const },
   { label: "Belajar", icon: Layers, color: "from-[#B8A8FF] to-[#6C63FF]", to: "/study" as const },
-  { label: "Quiz", icon: HelpCircle, color: "from-[#8FE3FF] to-[#4D8DFF]", to: "/study" as const },
+  { label: "Quiz", icon: HelpCircle, color: "from-[#8FE3FF] to-[#4D8DFF]", to: "/quiz" as const },
 ];
 
 function HomePage() {
@@ -75,16 +75,16 @@ function HomePage() {
           </div>
           <div className="flex items-center gap-2">
             <Link
-              to="/notes"
+              to="/search"
               className="h-10 w-10 rounded-2xl glass flex items-center justify-center hover:bg-white/10 transition"
               aria-label="Cari catatan"
             >
               <Search className="h-4 w-4" />
             </Link>
             <Link
-              to="/profile"
+              to="/notifications"
               className="relative h-10 w-10 rounded-2xl glass flex items-center justify-center hover:bg-white/10 transition"
-              aria-label="Profil"
+              aria-label="Notifikasi"
             >
               <Bell className="h-4 w-4" />
               <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-[#FF6B8A]" />

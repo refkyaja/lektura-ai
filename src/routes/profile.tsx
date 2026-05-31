@@ -11,9 +11,9 @@ export const Route = createFileRoute("/profile")({
 });
 
 const items = [
-  { icon: Settings, label: "Pengaturan" },
-  { icon: Bell, label: "Notifikasi" },
-  { icon: Shield, label: "Privasi & Keamanan" },
+  { icon: Settings, label: "Pengaturan", to: "/settings" as const },
+  { icon: Bell, label: "Notifikasi", to: "/notifications" as const },
+  { icon: Shield, label: "Privasi & Keamanan", to: "/privacy" as const },
 ];
 
 function ProfilePage() {
@@ -50,8 +50,9 @@ function ProfilePage() {
 
         <div className="mt-6 glass rounded-2xl overflow-hidden divide-y divide-white/5">
           {items.map((it) => (
-            <button
+            <Link
               key={it.label}
+              to={it.to}
               className="w-full flex items-center gap-3 p-4 hover:bg-white/[0.05] transition text-left"
             >
               <div className="h-9 w-9 rounded-xl bg-white/5 flex items-center justify-center">
@@ -59,7 +60,7 @@ function ProfilePage() {
               </div>
               <span className="flex-1 text-sm">{it.label}</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            </button>
+            </Link>
           ))}
           <Link
             to="/login"
