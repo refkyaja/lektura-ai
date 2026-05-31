@@ -34,7 +34,7 @@ const quickActions = [
   { label: "Tulis", icon: Type, color: "from-[#6C63FF] to-[#4D8DFF]", to: "/notes/new" as const },
   { label: "Catatan", icon: FileText, color: "from-[#4D8DFF] to-[#8FE3FF]", to: "/notes" as const },
   { label: "Belajar", icon: Layers, color: "from-[#B8A8FF] to-[#6C63FF]", to: "/study" as const },
-  { label: "Quiz", icon: HelpCircle, color: "from-[#8FE3FF] to-[#4D8DFF]", to: "/study" as const },
+  { label: "Quiz", icon: HelpCircle, color: "from-[#8FE3FF] to-[#4D8DFF]", to: "/quiz" as const },
 ];
 
 function HomePage() {
