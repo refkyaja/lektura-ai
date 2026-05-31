@@ -11,9 +11,9 @@ export const Route = createFileRoute("/profile")({
 });
 
 const items = [
-  { icon: Settings, label: "Pengaturan" },
-  { icon: Bell, label: "Notifikasi" },
-  { icon: Shield, label: "Privasi & Keamanan" },
+  { icon: Settings, label: "Pengaturan", to: "/settings" as const },
+  { icon: Bell, label: "Notifikasi", to: "/notifications" as const },
+  { icon: Shield, label: "Privasi & Keamanan", to: "/privacy" as const },
 ];
 
 function ProfilePage() {
