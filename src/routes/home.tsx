@@ -75,16 +75,16 @@ function HomePage() {
           </div>
           <div className="flex items-center gap-2">
             <Link
-              to="/notes"
+              to="/search"
               className="h-10 w-10 rounded-2xl glass flex items-center justify-center hover:bg-white/10 transition"
               aria-label="Cari catatan"
             >
               <Search className="h-4 w-4" />
             </Link>
             <Link
-              to="/profile"
+              to="/notifications"
               className="relative h-10 w-10 rounded-2xl glass flex items-center justify-center hover:bg-white/10 transition"
-              aria-label="Profil"
+              aria-label="Notifikasi"
             >
               <Bell className="h-4 w-4" />
               <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-[#FF6B8A]" />
