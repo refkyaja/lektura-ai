@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SummaryRouteImport } from './routes/summary'
 import { Route as StudyRouteImport } from './routes/study'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -26,6 +27,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as NotesNewRouteImport } from './routes/notes.new'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 
+const SummaryRoute = SummaryRouteImport.update({
+  id: '/summary',
+  path: '/summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudyRoute = StudyRouteImport.update({
   id: '/study',
   path: '/study',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/study': typeof StudyRoute
+  '/summary': typeof SummaryRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/new': typeof NotesNewRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/study': typeof StudyRoute
+  '/summary': typeof SummaryRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/new': typeof NotesNewRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/study': typeof StudyRoute
+  '/summary': typeof SummaryRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/new': typeof NotesNewRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/study'
+    | '/summary'
     | '/notes/$noteId'
     | '/notes/new'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/study'
+    | '/summary'
     | '/notes/$noteId'
     | '/notes/new'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/study'
+    | '/summary'
     | '/notes/$noteId'
     | '/notes/new'
   fileRoutesById: FileRoutesById
@@ -234,10 +246,18 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   StudyRoute: typeof StudyRoute
+  SummaryRoute: typeof SummaryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/summary': {
+      id: '/summary'
+      path: '/summary'
+      fullPath: '/summary'
+      preLoaderRoute: typeof SummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/study': {
       id: '/study'
       path: '/study'
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   StudyRoute: StudyRoute,
+  SummaryRoute: SummaryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
