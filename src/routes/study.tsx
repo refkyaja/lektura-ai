@@ -11,9 +11,9 @@ export const Route = createFileRoute("/study")({
 });
 
 const tools = [
-  { label: "Ringkasan", icon: Sparkles, desc: "AI rangkum poin penting", color: "from-[#6C63FF] to-[#4D8DFF]" },
-  { label: "Flashcard", icon: Layers, desc: "Kartu hafalan otomatis", color: "from-[#B8A8FF] to-[#6C63FF]" },
-  { label: "Quiz", icon: HelpCircle, desc: "Uji pemahaman kamu", color: "from-[#8FE3FF] to-[#4D8DFF]" },
+  { label: "Ringkasan", icon: Sparkles, desc: "AI rangkum poin penting", color: "from-[#6C63FF] to-[#4D8DFF]", to: "/summary" as const },
+  { label: "Flashcard", icon: Layers, desc: "Kartu hafalan otomatis", color: "from-[#B8A8FF] to-[#6C63FF]", to: "/flashcards" as const },
+  { label: "Quiz", icon: HelpCircle, desc: "Uji pemahaman kamu", color: "from-[#8FE3FF] to-[#4D8DFF]", to: "/quiz" as const },
 ];
 
 function StudyPage() {
@@ -28,7 +28,7 @@ function StudyPage() {
       <div className="relative z-10 max-w-md mx-auto px-5 pt-10">
         <h1 className="font-display text-2xl font-semibold">Belajar</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Pilih catatan, lalu ubah jadi materi belajar.
+          Pilih cara belajar yang paling cocok buat kamu.
         </p>
 
         <div className="mt-6 grid grid-cols-1 gap-3">
@@ -38,20 +38,22 @@ function StudyPage() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="glass rounded-2xl p-4 flex items-center gap-4"
             >
-              <div
-                className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${t.color} flex items-center justify-center`}
+              <Link
+                to={t.to}
+                className="glass rounded-2xl p-4 flex items-center gap-4 hover:bg-white/[0.07] transition"
               >
-                <t.icon className="h-6 w-6 text-white" />
-              </div>
-              <div className="flex-1">
-                <div className="font-medium">{t.label}</div>
-                <div className="text-xs text-muted-foreground">{t.desc}</div>
-              </div>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Segera
-              </span>
+                <div
+                  className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${t.color} flex items-center justify-center`}
+                >
+                  <t.icon className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-medium">{t.label}</div>
+                  <div className="text-xs text-muted-foreground">{t.desc}</div>
+                </div>
+                <span className="text-muted-foreground">→</span>
+              </Link>
             </motion.div>
           ))}
         </div>
